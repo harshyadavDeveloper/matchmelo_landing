@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const NAV_LINKS = ["Home", "Privacy Policy", "Terms & Services", "Refund Policy", "Contact"];
 
-const CONTACT_EMAIL = "contact@matchmelo.com";
+const CONTACT_EMAIL = "matchmelosupport@gmail.com";
 
 function Navbar({ page, setPage }) {
   const [open, setOpen] = useState(false);
@@ -145,20 +145,52 @@ function Section({ heading, children }) {
 function PrivacyPolicy() {
   return (
     <PolicyPage title="Privacy Policy">
+      <p style={{ marginBottom: "1.5rem", fontStyle: "italic" }}>
+        <strong>Effective Date: June 14, 2026</strong><br />
+        Welcome to MatchMelo. We are committed to protecting your privacy and ensuring you have a secure experience on our platform. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use the MatchMelo app, website, and associated services.
+      </p>
+
       <Section heading="1. Information We Collect">
-        We may collect personal information such as your name, email address, and usage data when you interact with MatchMelo. This helps us provide a better experience for all our users.
+        We collect information you provide directly, information derived from your use of the Platform, and information from third parties.<br /><br />
+        <strong>Account Information:</strong> When you register as a Client or Freelancer, we collect your name, email address, password, profile picture, and contact details.<br /><br />
+        <strong>Professional Information (Freelancers):</strong> To facilitate AI matchmaking and Proof of Work (PoW) scoring, we collect your portfolio data, education history, work samples, and skills.<br /><br />
+        <strong>Financial Information:</strong> To facilitate Trade Credit purchases, we collect payment details. Sensitive payment data is processed directly by third-party providers (e.g., Razorpay, Stripe) and is not stored on our servers.<br /><br />
+        <strong>Communication Data:</strong> We collect information from your interactions on our Collaboration Hub, including chat messages, media attachments, and responses.<br /><br />
+        <strong>Usage Data:</strong> We automatically collect data about your interactions with the Platform, including IP address, device type, operating system, and browsing behavior.
       </Section>
+
       <Section heading="2. How We Use Your Information">
-        Your information is used solely to operate, improve, and personalize the MatchMelo experience. We do not sell your data to third parties under any circumstances.
+        <strong>Providing and Improving Services:</strong> To operate the platform, facilitate freelancer-client matchmaking, and manage the Collaboration Hub.<br /><br />
+        <strong>AI and Scoring:</strong> To analyze freelancer Proof of Work submissions using our AI scoring algorithms to generate visibility metrics.<br /><br />
+        <strong>Trade Credits and Billing:</strong> To process payments for Trade Credits and maintain your account balance.<br /><br />
+        <strong>Communication:</strong> To send you updates, security alerts, support messages, and promotional content (which you can opt out of).<br /><br />
+        <strong>Trust and Safety:</strong> To prevent fraud, enforce our Terms of Service, and resolve disputes between users.
       </Section>
-      <Section heading="3. Data Security">
-        We implement industry-standard security measures to protect your personal information from unauthorized access, disclosure, or misuse.
+
+      <Section heading="3. How We Share Your Information">
+        We do not sell your personal data. We may share your information in the following circumstances:<br /><br />
+        <strong>Between Users:</strong> Client profiles are visible to Freelancers they interact with, and Freelancer profiles (including AI scores and portfolios) are visible to prospective Clients.<br /><br />
+        <strong>Service Providers:</strong> With third-party vendors who assist us in operating the Platform, such as payment processors (Razorpay/Stripe), cloud hosting, and analytics providers.<br /><br />
+        <strong>Legal Requirements:</strong> If required by law, subpoena, or other legal processes, or to protect the rights, property, and safety of MatchMelo, our users, or others.
       </Section>
-      <Section heading="4. Cookies">
-        MatchMelo may use cookies to enhance your experience. You can control cookie settings through your browser at any time.
+
+      <Section heading="4. Data Security">
+        We implement reasonable administrative, technical, and physical security measures to protect your personal information. However, no method of transmission over the internet or electronic storage is 100% secure.
       </Section>
-      <Section heading="5. Contact Us">
-        For any privacy-related questions, please reach out to us at <a href="mailto:contact@matchmelo.com" style={{ color: "#a8e63d" }}>contact@matchmelo.com</a>.
+
+      <Section heading="5. Your Rights">
+        Depending on your jurisdiction, you may have the right to access, correct, update, or delete your personal information. You can manage your account settings directly within the MatchMelo app or contact us for assistance.
+      </Section>
+
+      <Section heading="6. Changes to This Privacy Policy">
+        We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on the Platform and updating the Effective Date.
+      </Section>
+
+      <Section heading="7. Contact Us">
+        If you have any questions about this Privacy Policy, please contact us at:{" "}
+        <a href="mailto:matchmelosupport@gmail.com" style={{ color: "#3ab528", fontWeight: 700 }}>
+          matchmelosupport@gmail.com
+        </a>
       </Section>
     </PolicyPage>
   );
@@ -166,24 +198,57 @@ function PrivacyPolicy() {
 
 function TermsAndServices() {
   return (
-    <PolicyPage title="Terms & Services">
+    <PolicyPage title="Terms of Service">
+      <p style={{ marginBottom: "1.5rem", fontStyle: "italic" }}>
+        <strong>Effective Date: June 14, 2026</strong><br />
+        Welcome to MatchMelo. By accessing or using our platform, you agree to be bound by these Terms of Service. Please read them carefully.
+      </p>
+
       <Section heading="1. Acceptance of Terms">
-        By accessing or using MatchMelo, you agree to be bound by these Terms & Services. If you do not agree, please do not use our platform.
+        By creating an account and using the MatchMelo platform, you agree to these Terms. If you do not agree, you may not use our services.
       </Section>
-      <Section heading="2. Use of the Platform">
-        You agree to use MatchMelo only for lawful purposes and in a manner that does not infringe on the rights of others or restrict their use of the platform.
+
+      <Section heading="2. Description of Service">
+        MatchMelo is a platform that connects clients with independent professionals (Freelancers) for project collaboration. We provide tools including AI matchmaking, a Collaboration Hub, and Proof of Work (PoW) scoring. MatchMelo operates on a "Trade Credits" system to facilitate platform interactions. MatchMelo is not a party to the independent contracts formed directly between Clients and Freelancers.
       </Section>
-      <Section heading="3. Intellectual Property">
-        All content, branding, and features of MatchMelo are the exclusive property of MatchMelo and are protected by applicable intellectual property laws.
+
+      <Section heading="3. User Accounts">
+        <strong>Eligibility:</strong> You must be at least 18 years old to use the Platform.<br /><br />
+        <strong>Account Types:</strong> You may register as a Client, a Freelancer, or both. You are responsible for maintaining the confidentiality of your account credentials.<br /><br />
+        <strong>Accuracy of Information:</strong> You agree to provide accurate and up-to-date information, including for your profile and portfolio.
       </Section>
-      <Section heading="4. Account Responsibility">
-        You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account.
+
+      <Section heading="4. Platform Rules and Conduct">
+        When using MatchMelo, you agree NOT to:<br /><br />
+        • Submit false, misleading, or plagiarized Proof of Work (PoW) samples to inflate your AI score.<br />
+        • Engage in harassment, abusive language, or unprofessional conduct within the Collaboration Hub.<br />
+        • Use the Platform for any illegal activities or to distribute malicious content.
       </Section>
-      <Section heading="5. Termination">
-        We reserve the right to suspend or terminate access to MatchMelo for any user who violates these terms, without prior notice.
+
+      <Section heading="5. Trade Credits and Payments">
+        <strong>Trade Credits:</strong> To utilize certain premium features or connect with users, you may be required to use MatchMelo Trade Credits.<br /><br />
+        <strong>Purchasing Credits:</strong> Trade Credits can be purchased via our integrated payment gateways (e.g., Razorpay, Stripe).<br /><br />
+        <strong>Nature of Credits:</strong> Trade Credits are digital utility tokens intended solely for use within the MatchMelo platform. They have no real-world cash value, do not accrue interest, and cannot be withdrawn, redeemed, or exchanged for fiat currency.<br /><br />
+        <strong>Project Payments:</strong> Any monetary compensation for freelance work is arranged independently between the Client and the Freelancer. MatchMelo does not hold escrow for project deliverables.
       </Section>
-      <Section heading="6. Changes to Terms">
-        MatchMelo reserves the right to modify these terms at any time. Continued use of the platform after changes constitutes acceptance of the new terms.
+
+      <Section heading="6. Intellectual Property">
+        You retain ownership of the content you upload to your profile, including PoW samples. By uploading, you grant MatchMelo a license to display this content and use it for AI scoring and matchmaking purposes.
+      </Section>
+
+      <Section heading="7. Limitation of Liability">
+        MatchMelo provides the Platform "as is." We are not responsible for the quality, safety, or legality of services provided by Freelancers, nor the ability of Clients to fulfill independent payment agreements. To the maximum extent permitted by law, MatchMelo shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Platform or the Trade Credits system.
+      </Section>
+
+      <Section heading="8. Termination">
+        MatchMelo reserves the right to suspend or terminate your account, and forfeit any remaining Trade Credits, at any time for violations of these Terms or for any other reason deemed necessary to protect the integrity of the Platform.
+      </Section>
+
+      <Section heading="9. Contact Information">
+        For questions regarding these Terms, please contact us at:{" "}
+        <a href="mailto:matchmelosupport@gmail.com" style={{ color: "#3ab528", fontWeight: 700 }}>
+          matchmelosupport@gmail.com
+        </a>
       </Section>
     </PolicyPage>
   );
@@ -192,20 +257,44 @@ function TermsAndServices() {
 function RefundPolicy() {
   return (
     <PolicyPage title="Refund Policy">
-      <Section heading="1. General Policy">
-        At MatchMelo, we strive to ensure complete satisfaction. If you are not satisfied with a purchase, you may be eligible for a refund under the conditions outlined below.
+      <p style={{ marginBottom: "1.5rem", fontStyle: "italic" }}>
+        <strong>Effective Date: June 14, 2026</strong><br />
+        MatchMelo operates on a "Trade Credits" system to facilitate interactions, feature access, and collaborations between Clients and Freelancers. This Refund Policy outlines the conditions regarding the purchase and use of Trade Credits.
+      </p>
+
+      <Section heading="1. Trade Credit Purchases are Final">
+        All purchases of MatchMelo Trade Credits are considered final and non-refundable once the credits have been successfully credited to your account. Because Trade Credits are digital utility tokens granting immediate access to platform features, we cannot offer refunds for buyer's remorse or if you decide not to use the platform after purchasing them.
       </Section>
-      <Section heading="2. Eligibility for Refund">
-        Refund requests must be made within 7 days of the original purchase date. Requests made after this period will not be eligible for a refund.
+
+      <Section heading="2. Exceptions and Eligibility for Refunds">
+        We may, at our sole discretion, issue a refund for Trade Credit purchases under the following exceptional circumstances:<br /><br />
+        <strong>Billing Errors & Duplicate Charges:</strong> If you are accidentally charged multiple times for a single Trade Credit package due to a technical error.<br /><br />
+        <strong>System Failure:</strong> If a verifiable technical issue on the MatchMelo platform prevents the Trade Credits from being delivered to your account after a successful payment.<br /><br />
+        <strong>Unauthorized Transactions:</strong> If a purchase was made fraudulently using your payment information (subject to verification by our payment providers and your bank).
       </Section>
-      <Section heading="3. Non-Refundable Items">
-        Certain digital products or services that have been fully consumed or activated may not be eligible for a refund.
+
+      <Section heading="3. How to Request a Refund">
+        If you believe you meet the criteria in Section 2, you must submit a refund request within <strong>7 days</strong> of the transaction.<br /><br />
+        • Contact our support team at{" "}
+        <a href="mailto:matchmelosupport@gmail.com" style={{ color: "#3ab528", fontWeight: 700 }}>matchmelosupport@gmail.com</a><br />
+        • Include your MatchMelo account email, the transaction date, and the receipt/transaction ID.<br />
+        • Provide a brief explanation of the issue (e.g., "I was double-charged for the 100 Credit pack").<br /><br />
+        Our team will review your request and respond within <strong>3–5 business days</strong>.
       </Section>
-      <Section heading="4. How to Request a Refund">
-        To request a refund, please contact us at <a href="mailto:contact@matchmelo.com" style={{ color: "#a8e63d" }}>contact@matchmelo.com</a> with your order details. We will process eligible refunds within 5–7 business days.
+
+      <Section heading="4. Unused Credits">
+        Trade Credits do not expire as long as your account remains active. However, if you choose to close your MatchMelo account, or if your account is terminated due to a violation of our Terms of Service, any remaining unused Trade Credits will be forfeited and are not eligible for a refund or cash payout.
       </Section>
-      <Section heading="5. Processing Time">
-        Once a refund is approved, it will be credited back to your original payment method within 5–7 business days, depending on your bank or payment provider.
+
+      <Section heading="5. Independent Project Payments">
+        MatchMelo does not hold escrow for independent project deliverables. Any monetary transactions made directly between a Client and a Freelancer outside of the Trade Credits system are strictly between those two parties. MatchMelo cannot mediate, refund, or reverse payments made independently for freelance services.
+      </Section>
+
+      <Section heading="6. Contact Us">
+        If you have questions regarding this policy or your Trade Credits balance, please contact us at:{" "}
+        <a href="mailto:matchmelosupport@gmail.com" style={{ color: "#3ab528", fontWeight: 700 }}>
+          matchmelosupport@gmail.com
+        </a>
       </Section>
     </PolicyPage>
   );
@@ -224,14 +313,14 @@ function Contact() {
         <p style={{ color: "#1a3a0a", lineHeight: 1.7, marginBottom: "2rem" }}>
           Have a question, suggestion, or just want to say hi? We'd love to hear from you. Drop us an email and we'll get back to you as soon as possible.
         </p>
-        <a href="mailto:contact@matchmelo.com" style={{
+        <a href="mailto:matchmelosupport@gmail.com" style={{
           display: "block", background: "linear-gradient(135deg, #7ed321, #3ab528)",
           color: "#fff", fontFamily: "Nunito, sans-serif", fontWeight: 800,
           fontSize: "1.1rem", padding: "16px", borderRadius: 50,
           textDecoration: "none", marginBottom: "1rem",
           boxShadow: "0 4px 30px #7ed32140"
         }}>
-          ✉️ contact@matchmelo.com
+          ✉️ matchmelosupport@gmail.com
         </a>
         <p style={{ color: "#3ab528", fontSize: "0.85rem", fontWeight: 600 }}>
           We typically respond within 24–48 hours.

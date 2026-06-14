@@ -12,7 +12,7 @@ Official landing page for **MatchMelo**, built with React + Vite.
 | 🔒 Privacy Policy | How we handle user data |
 | 📋 Terms & Services | Platform usage terms |
 | 💸 Refund Policy | Refund eligibility and process |
-| ✉️ Contact | Reach us at contact@matchmelo.com |
+| ✉️ Contact | Reach us at matchmelosupport@gmail.com |
 
 ---
 
@@ -73,7 +73,7 @@ matchmelo-landing/
 
 ## 📬 Contact
 
-For questions or support: **contact@matchmelo.com**
+For questions or support: **matchmelosupport@gmail.com**
 
 ---
 
