@@ -93,7 +93,7 @@ function Home() {
       </h1>
 
       <p style={{
-        fontSize: "clamp(1rem, 2.5vw, 1.25rem)", color: "#8fbb7a",
+        fontSize: "clamp(1rem, 2.5vw, 1.25rem)", color: "#1a3a0a",
         maxWidth: 520, lineHeight: 1.7, marginBottom: "2.5rem", position: "relative"
       }}>
         Something exciting is on its way. MatchMelo is a brand new experience built to connect people in ways that feel natural, fun, and meaningful. Stay tuned — we're almost ready! 🎉
@@ -125,7 +125,7 @@ function PolicyPage({ title, children }) {
         <p style={{ color: "#3ab528", fontSize: "0.85rem", marginBottom: "2rem", fontWeight: 600 }}>
           Last updated: June 2026
         </p>
-        <div style={{ color: "#b8d9a0", lineHeight: 1.85, fontSize: "0.97rem" }}>
+        <div style={{ color: "#1a3a0a", lineHeight: 1.85, fontSize: "0.97rem" }}>
           {children}
         </div>
       </div>
@@ -221,7 +221,7 @@ function Contact() {
       }}>
         <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>💬</div>
         <h1 style={{ fontSize: "2rem", fontWeight: 900, color: "#a8e63d", marginBottom: "0.75rem" }}>Contact Us</h1>
-        <p style={{ color: "#8fbb7a", lineHeight: 1.7, marginBottom: "2rem" }}>
+        <p style={{ color: "#1a3a0a", lineHeight: 1.7, marginBottom: "2rem" }}>
           Have a question, suggestion, or just want to say hi? We'd love to hear from you. Drop us an email and we'll get back to you as soon as possible.
         </p>
         <a href="mailto:contact@matchmelo.com" style={{
