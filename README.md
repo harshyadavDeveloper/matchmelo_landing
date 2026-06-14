@@ -1,16 +1,80 @@
-# React + Vite
+# 🟢 MatchMelo — Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Official landing page for **MatchMelo**, built with React + Vite.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📄 Pages
 
-## React Compiler
+| Page | Description |
+|------|-------------|
+| 🏠 Home | Coming soon hero with logo and description |
+| 🔒 Privacy Policy | How we handle user data |
+| 📋 Terms & Services | Platform usage terms |
+| 💸 Refund Policy | Refund eligibility and process |
+| ✉️ Contact | Reach us at contact@matchmelo.com |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+- Node.js v18+
+- npm
+
+### Install & Run
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+```
+
+Then open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## 🏗️ Build for Production
+
+```bash
+npm run build
+```
+
+Output will be in the `dist/` folder — ready to deploy on Vercel, Netlify, or any static host.
+
+---
+
+## 🎨 Tech Stack
+
+- [React](https://react.dev/) — UI library
+- [Vite](https://vitejs.dev/) — Lightning fast build tool
+- Google Fonts — Nunito typeface
+- Pure CSS-in-JS styling (no external UI library)
+
+---
+
+## 📁 Project Structure
+
+```
+matchmelo-landing/
+├── public/
+│   └── logo.jpeg          # MatchMelo app logo
+├── src/
+│   ├── App.jsx            # All pages and components
+│   ├── index.css          # Global styles & CSS variables
+│   └── main.jsx           # React entry point
+├── index.html
+└── package.json
+```
+
+---
+
+## 📬 Contact
+
+For questions or support: **contact@matchmelo.com**
+
+---
+
+© 2026 MatchMelo. All rights reserved.

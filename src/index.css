@@ -7,13 +7,13 @@
 }
 
 :root {
-  --bg: #003d14;
-  --card: #004d1a;
+  --bg: #ffffff;
+  --card: #f4fdf0;
   --green-mid: #3ab528;
   --green-bright: #7ed321;
   --green-light: #a8e63d;
-  --text: #e8f5e0;
-  --muted: #8fbb7a;
+  --text: #1a3a0a;
+  --muted: #3a7a20;
 }
 
 body {

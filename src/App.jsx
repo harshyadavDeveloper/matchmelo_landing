@@ -76,10 +76,11 @@ function Home() {
       }} />
 
       <div style={{
-        display: "inline-block", background: "#3ab52820", border: "1px solid #3ab52860",
-        borderRadius: 20, padding: "6px 18px", marginBottom: "1.2rem"
+        display: "inline-block", background: "#3ab528", border: "2px solid #7ed321",
+        borderRadius: 20, padding: "8px 22px", marginBottom: "1.2rem",
+        boxShadow: "0 4px 20px #3ab52850"
       }}>
-        <span style={{ color: "#a8e63d", fontWeight: 700, fontSize: "0.8rem", letterSpacing: 2 }}>🚀 COMING SOON</span>
+        <span style={{ color: "#ffffff", fontWeight: 800, fontSize: "0.85rem", letterSpacing: 3 }}>🚀 COMING SOON</span>
       </div>
 
       <h1 style={{
