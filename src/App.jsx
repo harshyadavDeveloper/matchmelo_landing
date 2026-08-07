@@ -4,6 +4,34 @@ const NAV_LINKS = ["Home", "Privacy Policy", "Terms & Services", "Refund Policy"
 
 const CONTACT_EMAIL = "matchmelosupport@gmail.com";
 
+// ---- EmailJS config ----
+// Create a free account at emailjs.com, add an email service + template,
+// then drop your IDs in here. Template should expect: first_name, last_name, email.
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+async function sendWaitlistEmail({ firstName, lastName, email }) {
+  const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service_id: EMAILJS_SERVICE_ID,
+      template_id: EMAILJS_TEMPLATE_ID,
+      user_id: EMAILJS_PUBLIC_KEY,
+      template_params: {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+      },
+    }),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(text || "Failed to submit waitlist request");
+  }
+}
+
 function Navbar({ page, setPage }) {
   const [open, setOpen] = useState(false);
   return (
@@ -59,9 +87,139 @@ function Navbar({ page, setPage }) {
   );
 }
 
-function Home() {
+function WaitlistModal({ isOpen, onClose }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [errorMsg, setErrorMsg] = useState("");
+
+  if (!isOpen) return null;
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const canSubmit = firstName.trim() && lastName.trim() && isValidEmail && status !== "loading";
+
+  const handleClose = () => {
+    setFirstName(""); setLastName(""); setEmail("");
+    setStatus("idle"); setErrorMsg("");
+    onClose();
+  };
+
+  const handleSubmit = async () => {
+    if (!canSubmit) return;
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      await sendWaitlistEmail({ firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim() });
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg("Something went wrong. Please try again in a moment.", err);
+    }
+  };
+
+  const inputStyle = {
+    width: "100%", background: "#00220c", border: "1px solid #3ab52850",
+    borderRadius: 12, padding: "12px 14px", color: "#e8f7dd",
+    fontFamily: "Nunito, sans-serif", fontSize: "0.95rem", outline: "none",
+    marginBottom: "1rem", boxSizing: "border-box"
+  };
+
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6rem 1.5rem 3rem", textAlign: "center" }}>
+    <div
+      onClick={handleClose}
+      style={{
+        position: "fixed", inset: 0, background: "rgba(0,10,4,0.75)",
+        backdropFilter: "blur(4px)", zIndex: 200,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "1.5rem"
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#03230f", border: "1px solid #3ab52850",
+          borderRadius: 24, padding: "2.25rem", maxWidth: 440, width: "100%",
+          boxShadow: "0 20px 80px rgba(0,0,0,0.5)", position: "relative"
+        }}
+      >
+        <button onClick={handleClose} style={{
+          position: "absolute", top: 16, right: 18, background: "none",
+          border: "none", color: "#8fbb7a", fontSize: "1.3rem", cursor: "pointer"
+        }}>✕</button>
+
+        {status === "success" ? (
+          <div style={{ textAlign: "center", padding: "1rem 0" }}>
+            <div style={{ fontSize: "2.5rem", marginBottom: "0.75rem" }}>🎉</div>
+            <h2 style={{ color: "#a8e63d", fontWeight: 900, fontSize: "1.4rem", marginBottom: "0.6rem" }}>
+              You're on the list!
+            </h2>
+            <p style={{ color: "#c9e6bb", lineHeight: 1.6, fontSize: "0.95rem" }}>
+              Thanks, {firstName}. We'll email you at <strong>{email}</strong> as soon as beta access opens up.
+            </p>
+          </div>
+        ) : (
+          <>
+            <h2 style={{ color: "#a8e63d", fontWeight: 900, fontSize: "1.5rem", marginBottom: "0.4rem" }}>
+              Join the Waitlist
+            </h2>
+            <p style={{ color: "#8fbb7a", fontSize: "0.9rem", marginBottom: "1.5rem", lineHeight: 1.5 }}>
+              Be first in line for beta access. Drop your details below.
+            </p>
+
+            <input
+              style={inputStyle}
+              placeholder="First name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              style={inputStyle}
+              placeholder="Last name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <input
+              style={inputStyle}
+              placeholder="Email address"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter" && canSubmit) handleSubmit(); }}
+            />
+
+            {status === "error" && (
+              <p style={{ color: "#ff8a8a", fontSize: "0.85rem", marginBottom: "1rem" }}>{errorMsg}</p>
+            )}
+
+            <button
+              onClick={handleSubmit}
+              disabled={!canSubmit}
+              style={{
+                width: "100%", background: canSubmit
+                  ? "linear-gradient(135deg, #7ed321, #3ab528)"
+                  : "#2a4a1f",
+                color: "#fff", fontFamily: "Nunito, sans-serif", fontWeight: 800,
+                fontSize: "1rem", padding: "14px", borderRadius: 50, border: "none",
+                cursor: canSubmit ? "pointer" : "not-allowed",
+                opacity: status === "loading" ? 0.7 : 1,
+                transition: "all 0.2s"
+              }}
+            >
+              {status === "loading" ? "Submitting..." : "Join Waitlist"}
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Home() {
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
+
+  return (
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6rem 1.5rem 3rem", textAlign: "center", position: "relative" }}>
       {/* Glow blob */}
       <div style={{
         position: "absolute", width: 400, height: 400, borderRadius: "50%",
@@ -75,14 +233,6 @@ function Home() {
         marginBottom: "2rem", position: "relative"
       }} />
 
-      <div style={{
-        display: "inline-block", background: "#3ab528", border: "2px solid #7ed321",
-        borderRadius: 20, padding: "8px 22px", marginBottom: "1.2rem",
-        boxShadow: "0 4px 20px #3ab52850"
-      }}>
-        <span style={{ color: "#ffffff", fontWeight: 800, fontSize: "0.85rem", letterSpacing: 3 }}>🚀 COMING SOON</span>
-      </div>
-
       <h1 style={{
         fontSize: "clamp(2.8rem, 8vw, 5rem)", fontWeight: 900,
         background: "linear-gradient(135deg, #a8e63d 0%, #7ed321 50%, #3ab528 100%)",
@@ -94,20 +244,43 @@ function Home() {
 
       <p style={{
         fontSize: "clamp(1rem, 2.5vw, 1.25rem)", color: "#1a3a0a",
-        maxWidth: 520, lineHeight: 1.7, marginBottom: "2.5rem", position: "relative"
+        maxWidth: 560, lineHeight: 1.7, marginBottom: "1rem", position: "relative"
       }}>
-        Something exciting is on its way. MatchMelo is a brand new experience built to connect people in ways that feel natural, fun, and meaningful. Stay tuned — we're almost ready! 🎉
+        The AI-powered platform that matches clients with the right freelancers in seconds — not days.
       </p>
 
-      <a href={`mailto:${CONTACT_EMAIL}`} style={{
-        background: "linear-gradient(135deg, #7ed321, #3ab528)",
-        color: "#fff", fontFamily: "Nunito, sans-serif", fontWeight: 800,
-        fontSize: "1rem", padding: "14px 36px", borderRadius: 50,
-        textDecoration: "none", boxShadow: "0 4px 30px #7ed32140",
-        transition: "transform 0.2s, box-shadow 0.2s", display: "inline-block"
+      <p style={{
+        fontSize: "0.95rem", color: "#2f5c1f",
+        maxWidth: 540, lineHeight: 1.7, marginBottom: "2.5rem", position: "relative"
       }}>
-        Get in Touch ✉️
-      </a>
+        Verified Proof-of-Work scoring, real-time collaboration, and trades that clear in 48 hours —
+        not the 14-day holds you're used to.
+      </p>
+
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center", position: "relative" }}>
+        <button onClick={() => setWaitlistOpen(true)} style={{
+          background: "linear-gradient(135deg, #7ed321, #3ab528)",
+          color: "#fff", fontFamily: "Nunito, sans-serif", fontWeight: 800,
+          fontSize: "1rem", padding: "14px 36px", borderRadius: 50,
+          border: "none", boxShadow: "0 4px 30px #7ed32140",
+          transition: "transform 0.2s, box-shadow 0.2s", display: "inline-block",
+          cursor: "pointer"
+        }}>
+          🎉 Join the Waitlist
+        </button>
+
+        <a href={`mailto:${CONTACT_EMAIL}`} style={{
+          background: "transparent",
+          color: "#a8e63d", fontFamily: "Nunito, sans-serif", fontWeight: 800,
+          fontSize: "1rem", padding: "14px 36px", borderRadius: 50,
+          textDecoration: "none", border: "2px solid #3ab52860",
+          transition: "all 0.2s", display: "inline-block"
+        }}>
+          Get in Touch ✉️
+        </a>
+      </div>
+
+      <WaitlistModal isOpen={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </div>
   );
 }
