@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NAV_LINKS = ["Home", "Privacy Policy", "Terms & Services", "Refund Policy", "Contact"];
 
 const CONTACT_EMAIL = "matchmelosupport@gmail.com";
 
 // ---- EmailJS config ----
-// Create a free account at emailjs.com, add an email service + template,
-// then drop your IDs in here. Template should expect: first_name, last_name, email.
+// Pulled from .env (see .env.example). Vite only exposes vars prefixed with VITE_.
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 async function sendWaitlistEmail({ firstName, lastName, email }) {
+  if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+    throw new Error(
+      "EmailJS env vars are missing. Check your .env file has VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY, and restart the dev server."
+    );
+  }
+
   const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -19,7 +24,7 @@ async function sendWaitlistEmail({ firstName, lastName, email }) {
       service_id: EMAILJS_SERVICE_ID,
       template_id: EMAILJS_TEMPLATE_ID,
       user_id: EMAILJS_PUBLIC_KEY,
-      template_params: { 
+      template_params: {
         first_name: firstName,
         last_name: lastName,
         email: email,
@@ -30,6 +35,28 @@ async function sendWaitlistEmail({ firstName, lastName, email }) {
     const text = await res.text().catch(() => "");
     throw new Error(text || "Failed to submit waitlist request");
   }
+}
+
+// ---- Waitlist counter (no backend) ----
+// countapi.xyz (the original service) is dead as of 2026 — using the
+// community-run replacement at countapi.mileshilliard.com instead.
+// No signup/keys needed. Pick a key unlikely to collide with anyone else's project.
+const COUNTAPI_KEY = "matchmelo-com-waitlist-signups";
+const COUNTAPI_BASE = "https://countapi.mileshilliard.com/api/v1";
+
+async function getWaitlistCount() {
+  const res = await fetch(`${COUNTAPI_BASE}/get/${COUNTAPI_KEY}`);
+  if (res.status === 404) return 0; // key doesn't exist yet — nobody's joined
+  if (!res.ok) throw new Error("Failed to fetch waitlist count");
+  const data = await res.json();
+  return Number(data.value) || 0;
+}
+
+async function incrementWaitlistCount() {
+  const res = await fetch(`${COUNTAPI_BASE}/hit/${COUNTAPI_KEY}`);
+  if (!res.ok) throw new Error("Failed to increment waitlist count");
+  const data = await res.json();
+  return Number(data.value) || 0;
 }
 
 function Navbar({ page, setPage }) {
@@ -87,7 +114,7 @@ function Navbar({ page, setPage }) {
   );
 }
 
-function WaitlistModal({ isOpen, onClose }) {
+function WaitlistModal({ isOpen, onClose, onJoined }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -112,9 +139,10 @@ function WaitlistModal({ isOpen, onClose }) {
     try {
       await sendWaitlistEmail({ firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim() });
       setStatus("success");
+      // Counter bump shouldn't block the success UI if it's slow/down.
+      incrementWaitlistCount().then(onJoined).catch(() => {});
     } catch (err) {
       setStatus("error");
-      console.error("Waitlist submission error:", err);
       setErrorMsg("Something went wrong. Please try again in a moment.", err);
     }
   };
@@ -218,6 +246,11 @@ function WaitlistModal({ isOpen, onClose }) {
 
 function Home() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [waitlistCount, setWaitlistCount] = useState(null);
+
+  useEffect(() => {
+    getWaitlistCount().then(setWaitlistCount).catch(() => {});
+  }, []);
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6rem 1.5rem 3rem", textAlign: "center", position: "relative" }}>
@@ -281,7 +314,20 @@ function Home() {
         </a>
       </div>
 
-      <WaitlistModal isOpen={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
+       {waitlistCount >= 200 && (
+        <p style={{
+          marginTop: "1.25rem", color: "#3ab528", fontSize: "0.85rem",
+          fontWeight: 700, position: "relative"
+        }}>
+          🎉 {waitlistCount.toLocaleString()}+ waiting
+        </p>
+      )}
+
+      <WaitlistModal
+        isOpen={waitlistOpen}
+        onClose={() => setWaitlistOpen(false)}
+        onJoined={(newCount) => setWaitlistCount(newCount)}
+      />
     </div>
   );
 }
