@@ -19,7 +19,7 @@ async function sendWaitlistEmail({ firstName, lastName, email }) {
       service_id: EMAILJS_SERVICE_ID,
       template_id: EMAILJS_TEMPLATE_ID,
       user_id: EMAILJS_PUBLIC_KEY,
-      template_params: {
+      template_params: { 
         first_name: firstName,
         last_name: lastName,
         email: email,
@@ -114,6 +114,7 @@ function WaitlistModal({ isOpen, onClose }) {
       setStatus("success");
     } catch (err) {
       setStatus("error");
+      console.error("Waitlist submission error:", err);
       setErrorMsg("Something went wrong. Please try again in a moment.", err);
     }
   };
