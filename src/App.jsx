@@ -285,12 +285,12 @@ function Home() {
         MatchMelo
       </h1>
 
-      <p style={{
+      <h3 style={{
         fontSize: "clamp(1rem, 2.5vw, 1.25rem)", color: "#1a3a0a",
         maxWidth: 560, lineHeight: 1.7, marginBottom: "1rem", position: "relative"
       }}>
         AI Powered Talent Marketplace
-      </p>
+      </h3>
  
       <p style={{
         fontSize: "clamp(1rem, 2.5vw, 1.25rem)", color: "#1a3a0a",
@@ -319,7 +319,7 @@ function Home() {
           🎉 Join the Waitlist
         </button>
 
-        <a href="https://www.linkedin.com/company/matchmelo" target="_blank" rel="noopener noreferrer" style={{
+        {/* <a href="https://www.linkedin.com/company/matchmelo" target="_blank" rel="noopener noreferrer" style={{
           background: "transparent",
           color: "#a8e63d", fontFamily: "Nunito, sans-serif", fontWeight: 800,
           fontSize: "1rem", padding: "14px 36px", borderRadius: 50,
@@ -327,7 +327,7 @@ function Home() {
           transition: "all 0.2s", display: "inline-block"
         }}>
           Follow on LinkedIn 🔗
-        </a>
+        </a> */}
       </div>
  
       {waitlistCount >= 200 && (
@@ -565,6 +565,15 @@ function Contact() {
           boxShadow: "0 4px 30px #7ed32140"
         }}>
           ✉️ matchmelosupport@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/company/matchmelo" target="_blank" rel="noopener noreferrer" style={{
+          display: "block", background: "transparent",
+          color: "#a8e63d", fontFamily: "Nunito, sans-serif", fontWeight: 800,
+          fontSize: "1rem", padding: "14px", borderRadius: 50,
+          textDecoration: "none", marginBottom: "1rem",
+          border: "2px solid #3ab52860"
+        }}>
+          Follow on LinkedIn 🔗
         </a>
         <p style={{ color: "#3ab528", fontSize: "0.85rem", fontWeight: 600 }}>
           We typically respond within 24–48 hours.
