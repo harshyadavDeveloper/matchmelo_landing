@@ -247,11 +247,11 @@ function WaitlistModal({ isOpen, onClose, onJoined }) {
 function Home() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [waitlistCount, setWaitlistCount] = useState(null);
-
+ 
   useEffect(() => {
     getWaitlistCount().then(setWaitlistCount).catch(() => {});
   }, []);
-
+ 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6rem 1.5rem 3rem", textAlign: "center", position: "relative" }}>
       {/* Glow blob */}
@@ -260,13 +260,21 @@ function Home() {
         background: "radial-gradient(circle, #3ab52830 0%, transparent 70%)",
         top: "50%", left: "50%", transform: "translate(-50%,-60%)", pointerEvents: "none"
       }} />
-
+ 
       <img src="/matchmelo.jpeg" alt="MatchMelo Logo" style={{
         width: 140, height: 140, borderRadius: 32,
         boxShadow: "0 0 60px #7ed32150, 0 0 120px #3ab52830",
         marginBottom: "2rem", position: "relative"
       }} />
-
+ 
+      {/* <p style={{
+        fontSize: "0.85rem", color: "#3ab528", fontWeight: 800,
+        letterSpacing: 2, textTransform: "uppercase",
+        marginBottom: "0.75rem", position: "relative"
+      }}>
+        AI Powered Talent Marketplace
+      </p> */}
+ 
       <h1 style={{
         fontSize: "clamp(2.8rem, 8vw, 5rem)", fontWeight: 900,
         background: "linear-gradient(135deg, #a8e63d 0%, #7ed321 50%, #3ab528 100%)",
@@ -280,17 +288,24 @@ function Home() {
         fontSize: "clamp(1rem, 2.5vw, 1.25rem)", color: "#1a3a0a",
         maxWidth: 560, lineHeight: 1.7, marginBottom: "1rem", position: "relative"
       }}>
-        The AI-powered platform that matches clients with the right freelancers in seconds — not days.
+        AI Powered Talent Marketplace
       </p>
-
+ 
+      <p style={{
+        fontSize: "clamp(1rem, 2.5vw, 1.25rem)", color: "#1a3a0a",
+        maxWidth: 560, lineHeight: 1.7, marginBottom: "1rem", position: "relative"
+      }}>
+        AI matchmaking, portfolio scoring, and more.
+      </p>
+ 
       <p style={{
         fontSize: "0.95rem", color: "#2f5c1f",
         maxWidth: 540, lineHeight: 1.7, marginBottom: "2.5rem", position: "relative"
       }}>
-        Verified Proof-of-Work scoring, real-time collaboration, and trades that clear in 48 hours —
-        not the 14-day holds you're used to.
+        Be first to experience the future of freelancing. Join the MatchMelo Beta and unlock
+        exclusive early access perks before our official launch.
       </p>
-
+ 
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center", position: "relative" }}>
         <button onClick={() => setWaitlistOpen(true)} style={{
           background: "linear-gradient(135deg, #7ed321, #3ab528)",
@@ -302,7 +317,7 @@ function Home() {
         }}>
           🎉 Join the Waitlist
         </button>
-
+ 
         <a href={`mailto:${CONTACT_EMAIL}`} style={{
           background: "transparent",
           color: "#a8e63d", fontFamily: "Nunito, sans-serif", fontWeight: 800,
@@ -313,8 +328,8 @@ function Home() {
           Get in Touch ✉️
         </a>
       </div>
-
-       {waitlistCount >= 200 && (
+ 
+      {waitlistCount >= 200 && (
         <p style={{
           marginTop: "1.25rem", color: "#3ab528", fontSize: "0.85rem",
           fontWeight: 700, position: "relative"
@@ -322,7 +337,15 @@ function Home() {
           🎉 {waitlistCount.toLocaleString()}+ waiting
         </p>
       )}
-
+ 
+      <p style={{
+        marginTop: "1.5rem", color: "#4a7a34", fontSize: "0.8rem",
+        fontStyle: "italic", maxWidth: 480, lineHeight: 1.6, position: "relative"
+      }}>
+        NOTE: All Beta participants get 3 months of FREE Premium access to every feature
+        when MatchMelo officially drops!
+      </p>
+ 
       <WaitlistModal
         isOpen={waitlistOpen}
         onClose={() => setWaitlistOpen(false)}
