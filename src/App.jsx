@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const NAV_LINKS = ["Home", "Privacy Policy", "Terms & Services", "Refund Policy", "Contact"];
 
-const CONTACT_EMAIL = "matchmelosupport@gmail.com";
+// const CONTACT_EMAIL = "matchmelosupport@gmail.com";
 
 // ---- EmailJS config ----
 // Pulled from .env (see .env.example). Vite only exposes vars prefixed with VITE_.
@@ -262,8 +262,9 @@ function Home() {
       }} />
  
       <img src="/matchmelo.jpeg" alt="MatchMelo Logo" style={{
-        width: 140, height: 140, borderRadius: 32,
-        boxShadow: "0 0 60px #7ed32150, 0 0 120px #3ab52830",
+        width: 140, height: 140,
+         borderRadius: 32,
+        // boxShadow: "0 0 60px #7ed32150, 0 0 120px #3ab52830",
         marginBottom: "2rem", position: "relative"
       }} />
  
@@ -306,7 +307,7 @@ function Home() {
         exclusive early access perks before our official launch.
       </p>
  
-      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center", position: "relative" }}>
+     <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center", position: "relative" }}>
         <button onClick={() => setWaitlistOpen(true)} style={{
           background: "linear-gradient(135deg, #7ed321, #3ab528)",
           color: "#fff", fontFamily: "Nunito, sans-serif", fontWeight: 800,
@@ -317,15 +318,15 @@ function Home() {
         }}>
           🎉 Join the Waitlist
         </button>
- 
-        <a href={`mailto:${CONTACT_EMAIL}`} style={{
+
+        <a href="https://www.linkedin.com/company/matchmelo" target="_blank" rel="noopener noreferrer" style={{
           background: "transparent",
           color: "#a8e63d", fontFamily: "Nunito, sans-serif", fontWeight: 800,
           fontSize: "1rem", padding: "14px 36px", borderRadius: 50,
           textDecoration: "none", border: "2px solid #3ab52860",
           transition: "all 0.2s", display: "inline-block"
         }}>
-          Get in Touch ✉️
+          Follow on LinkedIn 🔗
         </a>
       </div>
  
