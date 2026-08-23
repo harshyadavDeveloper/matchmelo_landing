@@ -1,9 +1,9 @@
 import { PolicyPage } from "../components/PolicyPage";
 import { Section } from "../components/Section";
 
-export function PrivacyPolicy() {
+export function PrivacyPolicy({ onNavigate }) {
     return (
-        <PolicyPage title="Privacy Policy">
+        <PolicyPage title="Privacy Policy" onNavigate={onNavigate}>
             <p style={{ marginBottom: "1.5rem", fontStyle: "italic" }}>
                 <strong>Effective Date: June 14, 2026</strong><br />
                 Welcome to MatchMelo. We are committed to protecting your privacy and ensuring you have a secure experience on our platform. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use the MatchMelo app, website, and associated services.

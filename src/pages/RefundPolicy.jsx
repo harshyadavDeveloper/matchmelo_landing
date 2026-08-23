@@ -1,9 +1,9 @@
 import { PolicyPage } from "../components/PolicyPage";
 import { Section } from "../components/Section";
 
-export function RefundPolicy() {
+export function RefundPolicy({ onNavigate }) {
     return (
-        <PolicyPage title="Refund Policy">
+        <PolicyPage title="Refund Policy" onNavigate={onNavigate}>
             <p style={{ marginBottom: "1.5rem", fontStyle: "italic" }}>
                 <strong>Effective Date: June 14, 2026</strong><br />
                 MatchMelo operates on a "Trade Credits" system to facilitate interactions, feature access, and collaborations between Clients and Freelancers. This Refund Policy outlines the conditions regarding the purchase and use of Trade Credits.
