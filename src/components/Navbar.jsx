@@ -56,7 +56,17 @@ export function Navbar({ onJoinWaitlist }) {
                     onClick={() => scrollToSection("hero")}
                     className="font-headline-lg text-headline-lg text-primary uppercase tracking-tighter flex items-center gap-2"
                 >
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>bolt</span>
+                    <img
+                        src="/matchmelo-logo.jpeg"
+                        alt="MM"
+                        style={{
+                            height: "70px",
+                            width: "auto",
+                            maxWidth: "none",
+                            objectFit: "contain",
+                            flexShrink: 0,
+                        }}
+                    />
                     MATCHMELO
                 </button>
 
