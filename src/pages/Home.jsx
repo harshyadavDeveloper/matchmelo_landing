@@ -3,7 +3,8 @@ export function Home({ onJoinWaitlist }) {
     return (
         <>
             {/* Hero Section */}
-            <section className="relative px-margin-mobile md:px-margin-desktop py-xl min-h-[80vh] flex flex-col justify-center items-center overflow-hidden">
+
+            <section id="hero" className="relative px-margin-mobile md:px-margin-desktop py-xl min-h-[80vh] flex flex-col justify-center items-center overflow-hidden">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-fixed rounded-full mix-blend-multiply opacity-50 blur-3xl -z-10" />
                 <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary-container rounded-full mix-blend-multiply opacity-50 blur-2xl -z-10" />
 
@@ -54,7 +55,7 @@ export function Home({ onJoinWaitlist }) {
             </div>
 
             {/* Value Prop 1: AI Matchmaking */}
-            <section className="px-margin-mobile md:px-margin-desktop py-xl relative">
+            <section id="problem-solution" className="px-margin-mobile md:px-margin-desktop py-xl relative">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
                     <div className="md:col-span-5 order-2 md:order-1 relative">
                         <div className="bg-halftone absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-xl" />
@@ -81,7 +82,7 @@ export function Home({ onJoinWaitlist }) {
             </section>
 
             {/* Value Prop 2: Trade System */}
-            <section className="px-margin-mobile md:px-margin-desktop py-xl bg-tertiary-fixed-dim relative overflow-hidden mt-xl">
+            <section id="theft-proof" className="px-margin-mobile md:px-margin-desktop py-xl bg-tertiary-fixed-dim relative overflow-hidden mt-xl">
                 <div className="absolute inset-0 bg-grain opacity-50 mix-blend-overlay" />
                 <div className="max-w-5xl mx-auto relative z-10 text-center mb-lg">
                     <h3 className="font-display-lg text-display-lg text-on-tertiary-fixed uppercase">THEFT-PROOF TRADE SYSTEM</h3>
@@ -117,7 +118,7 @@ export function Home({ onJoinWaitlist }) {
             </section>
 
             {/* Final CTA Collage */}
-            <section className="px-margin-mobile md:px-margin-desktop py-xl min-h-[60vh] flex flex-col items-center justify-center relative mt-xl">
+            <section id="get-started" className="px-margin-mobile md:px-margin-desktop py-xl min-h-[60vh] flex flex-col items-center justify-center relative mt-xl">
                 <div className="absolute inset-0 bg-halftone opacity-10" />
                 <div className="bg-surface-container-lowest p-xl border-4 border-on-background shadow-[12px_12px_0px_0px_#446900] rotate-1 max-w-4xl w-full text-center relative z-10">
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-outline-variant opacity-80 rotate-neg-2" />
