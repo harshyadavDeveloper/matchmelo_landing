@@ -1,45 +1,36 @@
 import { useState } from "react";
 
-import { PrivacyPolicy } from "./pages/PrivacyPolicy";
-import { TermsAndServices } from "./pages/TermsAndServices";
-import { RefundPolicy } from "./pages/RefundPolicy";
-import { Contact } from "./pages/Contact";
-import { Home } from "./pages/Home";
-
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { WaitlistModal } from "./components/WaitlistModal";
+import { Home } from "./pages/Home";
 
 export default function App() {
-  const [page, setPage] = useState("Home");
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
-  const renderPage = () => {
-    switch (page) {
-      case "Privacy Policy":
-        return <PrivacyPolicy />;
+  const openWaitlist = () => {
+    setIsWaitlistOpen(true);
+  };
 
-      case "Terms & Services":
-        return <TermsAndServices />;
-
-      case "Refund Policy":
-        return <RefundPolicy />;
-
-      case "Contact":
-        return <Contact />;
-
-      default:
-        return <Home />;
-    }
+  const closeWaitlist = () => {
+    setIsWaitlistOpen(false);
   };
 
   return (
     <>
-      <Navbar page={page} setPage={setPage} />
+      <Navbar onJoinWaitlist={openWaitlist} />
 
-      <main>
-        {renderPage()}
+      <main className="flex-grow z-10 relative">
+        <Home onJoinWaitlist={openWaitlist} />
       </main>
 
-      <Footer setPage={setPage} />
+      <Footer />
+
+      <WaitlistModal
+        isOpen={isWaitlistOpen}
+        onClose={closeWaitlist}
+        onJoined={() => { }}
+      />
     </>
   );
 }

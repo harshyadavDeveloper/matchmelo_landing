@@ -48,3 +48,11 @@ export async function incrementWaitlistCount() {
     const data = await res.json();
     return Number(data.value) || 0;
 }
+
+export async function getWaitlistCount() {
+    const res = await fetch(`${COUNTAPI_BASE}/get/${COUNTAPI_KEY}`);
+    if (res.status === 404) return 0; // key doesn't exist yet — nobody's joined
+    if (!res.ok) throw new Error("Failed to fetch waitlist count");
+    const data = await res.json();
+    return Number(data.value) || 0;
+}

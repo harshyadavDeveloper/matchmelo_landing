@@ -1,19 +1,18 @@
-export function Footer({ setPage }) {
+export function Footer() {
     return (
-        <footer style={{
-            borderTop: "1px solid #3ab52830", padding: "2rem 1.5rem",
-            textAlign: "center", color: "#3ab528"
-        }}>
-            <div style={{ display: "flex", justifyContent: "center", gap: "1.5rem", flexWrap: "wrap", marginBottom: "1rem" }}>
-                {["Privacy Policy", "Terms & Services", "Refund Policy", "Contact"].map(link => (
-                    <button key={link} onClick={() => setPage(link)} style={{
-                        background: "none", border: "none", color: "#3ab528",
-                        fontFamily: "Nunito, sans-serif", fontWeight: 700,
-                        fontSize: "0.85rem", cursor: "pointer", textDecoration: "underline"
-                    }}>{link}</button>
-                ))}
+        <footer className="bg-inverse-surface border-t-4 border-dashed border-outline-variant flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-lg w-full mt-auto relative z-10">
+            <div className="font-headline-md text-headline-md text-primary-fixed mb-md md:mb-0">
+                MATCHMELO
             </div>
-            <p style={{ fontSize: "0.8rem" }}>© 2026 MatchMelo. All rights reserved.</p>
+            <div className="flex gap-md font-label-mono text-label-mono mb-md md:mb-0">
+                <a className="text-surface-variant opacity-80 hover:text-primary-fixed-dim hover:underline transition-opacity duration-300" href="#">Terms of Chaos</a>
+                <a className="text-surface-variant opacity-80 hover:text-primary-fixed-dim hover:underline transition-opacity duration-300" href="#">Privacy Leak</a>
+                <a className="text-surface-variant opacity-80 hover:text-primary-fixed-dim hover:underline transition-opacity duration-300" href="#">Newsletter</a>
+                <a className="text-surface-variant opacity-80 hover:text-primary-fixed-dim hover:underline transition-opacity duration-300" href="#">Careers</a>
+            </div>
+            <div className="font-body-md text-body-md text-primary-fixed">
+                © 2024 MATCHMELO. NO PERMISSION NEEDED.
+            </div>
         </footer>
     );
 }
