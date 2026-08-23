@@ -34,13 +34,13 @@ export default function App() {
   const renderPage = () => {
     switch (currentPage) {
       case "privacy":
-        return <PrivacyPolicy />;
+        return <PrivacyPolicy onNavigate={navigateTo} />;
 
       case "terms":
-        return <TermsAndServices />;
+        return <TermsAndServices onNavigate={navigateTo} />;
 
       case "refund":
-        return <RefundPolicy />;
+        return <RefundPolicy onNavigate={navigateTo} />;
 
       default:
         return <Home onJoinWaitlist={openWaitlist} />;

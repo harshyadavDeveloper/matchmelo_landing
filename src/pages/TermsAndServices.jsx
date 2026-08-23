@@ -1,9 +1,9 @@
 import { PolicyPage } from "../components/PolicyPage";
 import { Section } from "../components/Section";
 
-export function TermsAndServices() {
+export function TermsAndServices({ onNavigate }) {
     return (
-        <PolicyPage title="Terms of Service">
+        <PolicyPage title="Terms of Service" onNavigate={onNavigate}>
             <p style={{ marginBottom: "1.5rem", fontStyle: "italic" }}>
                 <strong>Effective Date: June 14, 2026</strong><br />
                 Welcome to MatchMelo. By accessing or using our platform, you agree to be bound by these Terms of Service. Please read them carefully.
