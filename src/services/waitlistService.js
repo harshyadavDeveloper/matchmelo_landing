@@ -13,46 +13,71 @@ const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const COUNTAPI_KEY = "matchmelo-com-waitlist-signups";
 const COUNTAPI_BASE = "https://countapi.mileshilliard.com/api/v1";
 
-
-
 export async function sendWaitlistEmail({ firstName, lastName, email }) {
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-        throw new Error(
-            "EmailJS env vars are missing. Check your .env file has VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY, and restart the dev server."
-        );
-    }
+  if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+    throw new Error(
+      "EmailJS env vars are missing. Check your .env file has VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY, and restart the dev server.",
+    );
+  }
 
-    const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            service_id: EMAILJS_SERVICE_ID,
-            template_id: EMAILJS_TEMPLATE_ID,
-            user_id: EMAILJS_PUBLIC_KEY,
-            template_params: {
-                first_name: firstName,
-                last_name: lastName,
-                email: email,
-            },
-        }),
-    });
-    if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || "Failed to submit waitlist request");
-    }
+  const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service_id: EMAILJS_SERVICE_ID,
+      template_id: EMAILJS_TEMPLATE_ID,
+      user_id: EMAILJS_PUBLIC_KEY,
+      template_params: {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+      },
+    }),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(text || "Failed to submit waitlist request");
+  }
 }
 
 export async function incrementWaitlistCount() {
-    const res = await fetch(`${COUNTAPI_BASE}/hit/${COUNTAPI_KEY}`);
-    if (!res.ok) throw new Error("Failed to increment waitlist count");
-    const data = await res.json();
-    return Number(data.value) || 0;
+  const res = await fetch(`${COUNTAPI_BASE}/hit/${COUNTAPI_KEY}`);
+  if (!res.ok) throw new Error("Failed to increment waitlist count");
+  const data = await res.json();
+  return Number(data.value) || 0;
 }
 
 export async function getWaitlistCount() {
-    const res = await fetch(`${COUNTAPI_BASE}/get/${COUNTAPI_KEY}`);
-    if (res.status === 404) return 0; // key doesn't exist yet — nobody's joined
-    if (!res.ok) throw new Error("Failed to fetch waitlist count");
-    const data = await res.json();
-    return Number(data.value) || 0;
+  const res = await fetch(`${COUNTAPI_BASE}/get/${COUNTAPI_KEY}`);
+  if (res.status === 404) return 0; // key doesn't exist yet — nobody's joined
+  if (!res.ok) throw new Error("Failed to fetch waitlist count");
+  const data = await res.json();
+  return Number(data.value) || 0;
+}
+
+export async function sendBetaUpdatesEmail({ email }) {
+  if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+    throw new Error(
+      "EmailJS env vars are missing. Check your .env file has VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY, and restart the dev server.",
+    );
+  }
+
+  const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service_id: EMAILJS_SERVICE_ID,
+      template_id: EMAILJS_TEMPLATE_ID,
+      user_id: EMAILJS_PUBLIC_KEY,
+      template_params: {
+        first_name: "",
+        last_name: "",
+        email: email,
+      },
+    }),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(text || "Failed to submit signup");
+  }
 }
