@@ -1,9 +1,31 @@
+import { useState } from "react";
+import { sendBetaUpdatesEmail, incrementWaitlistCount } from "../services/waitlistService";
 
 export function Home({ onJoinWaitlist }) {
+    const [betaEmail, setBetaEmail] = useState("");
+    const [betaStatus, setBetaStatus] = useState("idle"); // idle | submitting | success | error
+    const [betaError, setBetaError] = useState("");
+
+    async function handleBetaSubmit(e) {
+        e.preventDefault();
+        if (!betaEmail.trim()) return;
+
+        setBetaStatus("submitting");
+        setBetaError("");
+        try {
+            await sendBetaUpdatesEmail({ email: betaEmail.trim() });
+            await incrementWaitlistCount().catch(() => { }); // don't fail the signup over counter issues
+            setBetaStatus("success");
+            setBetaEmail("");
+        } catch (err) {
+            setBetaStatus("error");
+            setBetaError(err.message || "Something went wrong. Try again?");
+        }
+    }
+
     return (
         <>
             {/* Hero Section */}
-
             <section id="hero" className="relative px-margin-mobile md:px-margin-desktop py-xl min-h-[80vh] flex flex-col justify-center items-center overflow-hidden">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-fixed rounded-full mix-blend-multiply opacity-50 blur-3xl -z-10" />
                 <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary-container rounded-full mix-blend-multiply opacity-50 blur-2xl -z-10" />
@@ -117,30 +139,46 @@ export function Home({ onJoinWaitlist }) {
                 </div>
             </section>
 
-            {/* Final CTA Collage */}
+            {/* Final CTA: Beta updates opt-in */}
             <section id="get-started" className="px-margin-mobile md:px-margin-desktop py-xl min-h-[60vh] flex flex-col items-center justify-center relative mt-xl">
                 <div className="absolute inset-0 bg-halftone opacity-10" />
                 <div className="bg-surface-container-lowest p-xl border-4 border-on-background shadow-[12px_12px_0px_0px_#446900] rotate-1 max-w-4xl w-full text-center relative z-10">
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-outline-variant opacity-80 rotate-neg-2" />
                     <h2 className="font-display-lg text-display-lg text-on-background uppercase mb-md">
-                        Stop Searching.<br />Start Working.
+                        Get In Before<br />Everyone Else.
                     </h2>
                     <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-xl mx-auto">
-                        Join the disruptive freelance marketplace that actually has your back. No ghosting. No bs reviews. Just work.
+                        Drop your email and we'll ping you the second the beta goes live — with first dibs on founding-member perks before anyone else gets in.
                     </p>
-                    <form className="flex flex-col md:flex-row gap-sm justify-center max-w-lg mx-auto">
-                        <input
-                            className="flex-grow bg-surface border-2 border-on-background px-md py-sm font-body-md text-body-md focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container transition-colors shadow-inner"
-                            placeholder="Enter your email"
-                            type="email"
-                        />
-                        <button
-                            className="bg-primary text-on-primary font-label-bold text-label-bold px-lg py-sm border-2 border-on-background shadow-hard btn-press transition-all uppercase tracking-wider"
-                            type="submit"
-                        >
-                            Get Access
-                        </button>
-                    </form>
+
+                    {betaStatus === "success" ? (
+                        <p className="font-headline-md text-headline-md text-primary max-w-lg mx-auto">
+                            You're on the list. Watch your inbox. 🤘
+                        </p>
+                    ) : (
+                        <form className="flex flex-col md:flex-row gap-sm justify-center max-w-lg mx-auto" onSubmit={handleBetaSubmit}>
+                            <input
+                                className="flex-grow bg-surface border-2 border-on-background px-md py-sm font-body-md text-body-md focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container transition-colors shadow-inner"
+                                placeholder="Enter your email"
+                                type="email"
+                                value={betaEmail}
+                                onChange={(e) => setBetaEmail(e.target.value)}
+                                required
+                                disabled={betaStatus === "submitting"}
+                            />
+                            <button
+                                className="bg-primary text-on-primary font-label-bold text-label-bold px-lg py-sm border-2 border-on-background shadow-hard btn-press transition-all uppercase tracking-wider disabled:opacity-60"
+                                type="submit"
+                                disabled={betaStatus === "submitting"}
+                            >
+                                {betaStatus === "submitting" ? "Sending..." : "Notify Me"}
+                            </button>
+                        </form>
+                    )}
+
+                    {betaStatus === "error" && (
+                        <p className="font-body-md text-body-md text-error mt-sm">{betaError}</p>
+                    )}
                 </div>
                 <div className="absolute bottom-10 left-10 md:left-32 rotate-neg-2 opacity-90 z-20">
                     <img
@@ -153,7 +191,6 @@ export function Home({ onJoinWaitlist }) {
                     </svg>
                 </div>
             </section>
-
         </>
     );
 }
