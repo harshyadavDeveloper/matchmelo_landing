@@ -53,7 +53,7 @@ export function Home({ onJoinWaitlist }) {
                             >
                                 rocket_launch
                             </span>
-                            JOIN NOW
+                            TRY NOW
                         </button>
                     </div>
                 </div>

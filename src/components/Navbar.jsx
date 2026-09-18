@@ -92,7 +92,7 @@ export function Navbar({ onJoinWaitlist }) {
                     onClick={onJoinWaitlist}
                     className="bg-primary-container text-on-primary-container font-label-bold text-label-bold px-md py-sm border-2 border-on-background shadow-hard hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all rounded"
                 >
-                    Join Now
+                    Try Now
                 </button>
             </div>
         </nav>
