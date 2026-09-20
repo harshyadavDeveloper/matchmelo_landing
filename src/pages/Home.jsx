@@ -141,7 +141,7 @@ export function Home({ onJoinWaitlist }) {
             </section>
 
             {/* Final CTA: Beta updates opt-in */}
-            <section id="get-started" className="px-margin-mobile md:px-margin-desktop py-xl min-h-[60vh] flex flex-col items-center justify-center relative mt-xl">
+            {/* <section id="get-started" className="px-margin-mobile md:px-margin-desktop py-xl min-h-[60vh] flex flex-col items-center justify-center relative mt-xl">
                 <div className="absolute inset-0 bg-halftone opacity-10" />
                 <div className="bg-surface-container-lowest p-xl border-4 border-on-background shadow-[12px_12px_0px_0px_#446900] rotate-1 max-w-4xl w-full text-center relative z-10">
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-outline-variant opacity-80 rotate-neg-2" />
@@ -191,7 +191,7 @@ export function Home({ onJoinWaitlist }) {
                         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
                 </div>
-            </section>
+            </section> */}
         </>
     );
 }
