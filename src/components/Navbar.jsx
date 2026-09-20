@@ -87,13 +87,14 @@ export function Navbar({ onJoinWaitlist }) {
                     ))}
                 </div>
 
-                <button
-                    type="button"
-                    onClick={onJoinWaitlist}
+                <a
+                    href="https://app.matchmelo.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-primary-container text-on-primary-container font-label-bold text-label-bold px-md py-sm border-2 border-on-background shadow-hard hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all rounded"
                 >
                     Try Now
-                </button>
+                </a>
             </div>
         </nav>
     );

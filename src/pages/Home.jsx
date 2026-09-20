@@ -42,9 +42,10 @@ export function Home({ onJoinWaitlist }) {
                         Existing talent marketplaces are slow, manual, lack security and heavily favour clients, exposing freelancers to mid-project ghosting, unpaid deliverables, and asset theft all while these platforms extract predatory 20% commission fees.
                     </p>
                     <div className="flex flex-col md:flex-row gap-md">
-                        <button
-                            type="button"
-                            onClick={onJoinWaitlist}
+                        <a
+                            href="https://app.matchmelo.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-primary-container text-on-primary-container font-headline-md text-headline-md px-xl py-md border-2 border-on-background shadow-hard btn-press transition-all rounded flex items-center justify-center gap-sm"
                         >
                             <span
@@ -54,7 +55,7 @@ export function Home({ onJoinWaitlist }) {
                                 rocket_launch
                             </span>
                             TRY NOW
-                        </button>
+                        </a>
                     </div>
                 </div>
 
