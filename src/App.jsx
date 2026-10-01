@@ -49,20 +49,16 @@ export default function App() {
 
   return (
     <>
-      {currentPage === "home" && (
-        <Navbar onJoinWaitlist={openWaitlist} />
-      )}
+      {currentPage === "home" && <Navbar onJoinWaitlist={openWaitlist} />}
 
-      <main className="flex-grow z-10 relative">
-        {renderPage()}
-      </main>
+      <main className="flex-grow z-10 relative">{renderPage()}</main>
 
       <Footer onNavigate={navigateTo} />
 
       <WaitlistModal
         isOpen={isWaitlistOpen}
         onClose={closeWaitlist}
-        onJoined={() => { }}
+        onJoined={() => {}}
       />
     </>
   );
